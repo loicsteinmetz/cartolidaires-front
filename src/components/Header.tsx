@@ -4,7 +4,7 @@ import {THEME} from "../constants/theme.ts";
 import {SECTIONS} from "../constants/sections.ts";
 import {useEffect, useState} from "react";
 
-const Container = styled.header<{ expanded: boolean }>`
+const Container = styled.header<{ $expanded: boolean }>`
     background-color: ${THEME.colors.dark300};
     padding: ${THEME.spacing.s2} ${THEME.spacing.s5};
     display: flex;
@@ -15,14 +15,14 @@ const Container = styled.header<{ expanded: boolean }>`
     left: 0;
     right: 0;
     height: 100%;
-    max-height: ${({expanded}) => expanded ? THEME.header.heightExpanded : THEME.header.height}px;
+    max-height: ${({$expanded}) => $expanded ? THEME.header.heightExpanded : THEME.header.height}px;
     transition: max-height 300ms;
 `
 
-const Logo = styled.img<{ expanded: boolean }>`
-    max-height: ${({expanded}) => expanded ? '60%' : '80%'};
-    margin-top: ${({expanded}) => expanded ? '20px' : '5px'};
-    margin-bottom: ${({expanded}) => expanded ? '10px' : '0'};
+const Logo = styled.img<{ $expanded: boolean }>`
+    max-height: ${({$expanded}) => $expanded ? '60%' : '80%'};
+    margin-top: ${({$expanded}) => $expanded ? '20px' : '5px'};
+    margin-bottom: ${({$expanded}) => $expanded ? '10px' : '0'};
     transition: max-height 300ms, margin-bottom 300ms, margin-top 300ms;
 
     &:hover {
@@ -47,11 +47,11 @@ const Link = styled.li`
     list-style-type: none;
 `
 
-const Button = styled.button<{ variant: number, action?: boolean }>`
+const Button = styled.button<{ variant: number, $action?: boolean }>`
     font-family: ${THEME.fonts.text};
     font-size: ${THEME.fontSize.s2};
     padding: ${THEME.spacing.s2} ${THEME.spacing.s3};
-    background-color: ${({action}) => action ? THEME.colors.primary : THEME.colors.dark100};
+    background-color: ${({$action}) => $action ? THEME.colors.primary : THEME.colors.dark100};
     color: ${THEME.colors.white};
     clip-path: ${({variant}) => [
         'polygon(0 7%, 100% 0, 100% 100%, 2% 97%)',
@@ -59,17 +59,17 @@ const Button = styled.button<{ variant: number, action?: boolean }>`
         'polygon(0 3%, 100% 0, 100% 100%, 0 100%)',
         'polygon(2% 0, 100% 2%, 100% 100%, 0 100%);',
     ][variant]};
-    margin-left: ${({action}) => action ? THEME.spacing.s3 : 0};
+    margin-left: ${({$action}) => $action ? THEME.spacing.s3 : 0};
 
     &:hover, &:focus {
-        background-color: ${({action}) => action ? THEME.colors.primaryDark : THEME.colors.dark200};
+        background-color: ${({$action}) => $action ? THEME.colors.primaryDark : THEME.colors.dark200};
         cursor: pointer;
     }
 `
 
 export const Header = () => {
     const [scroll, setScroll] = useState(window.scrollY);
-    
+
     useEffect(() => {
         setScroll(window.scrollY);
         window.addEventListener('scroll', () => {
@@ -97,8 +97,8 @@ export const Header = () => {
     const expanded = scroll < 300;
 
     return (
-        <Container expanded={expanded}>
-            <Logo src={logo} alt={'Cartolidaires'} expanded={expanded} onClick={scrollToTop} onKeyUp={(e) => {
+        <Container $expanded={expanded}>
+            <Logo src={logo} alt={'Cartolidaires'} $expanded={expanded} onClick={scrollToTop} onKeyUp={(e) => {
                 if (e.key === 'Enter' || e.key === ' ') {
                     scrollToTop();
                 }
@@ -108,7 +108,7 @@ export const Header = () => {
                 <Link><Button variant={0} onClick={() => scrollTo(SECTIONS.map)}>La carte</Button></Link>
                 <Link><Button variant={1} onClick={() => scrollTo(SECTIONS.list)}>La liste</Button></Link>
                 <Link><Button variant={2} onClick={() => scrollTo(SECTIONS.about)}>En savoir plus</Button></Link>
-                <Link><Button variant={3} action>Ajouter une initiative</Button></Link>
+                <Link><Button variant={3} $action>Ajouter une initiative</Button></Link>
             </Links>
         </Container>
     )
