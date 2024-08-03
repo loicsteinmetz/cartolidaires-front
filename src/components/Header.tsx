@@ -69,12 +69,13 @@ const Button = styled.button<{ variant: number, action?: boolean }>`
 
 export const Header = () => {
     const [scroll, setScroll] = useState(window.scrollY);
-
+    
     useEffect(() => {
+        setScroll(window.scrollY);
         window.addEventListener('scroll', () => {
             setScroll(window.scrollY);
         });
-    });
+    }, []);
 
     const scrollTo = (id: string) => {
         const elt = document.querySelector('#' + id);
