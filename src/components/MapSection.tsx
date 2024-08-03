@@ -1,8 +1,9 @@
 import {SectionLayout} from "./SectionLayout.tsx";
+import {SECTIONS} from "../constants/sections.ts";
 
 export const MapSection = () => {
     return (
-        <SectionLayout>
+        <SectionLayout id={SECTIONS.map}>
             Map
         </SectionLayout>
     )

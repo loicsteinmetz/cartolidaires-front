@@ -2,4 +2,12 @@
     margin: 0;
     padding: 0;
     text-decoration: none;
+    border: none;
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: 'rockwell';
+    src: url('rockwell.ttf');
+    src: url('rockwell-bold.ttf');
 }
