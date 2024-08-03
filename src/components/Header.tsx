@@ -24,6 +24,10 @@ const Logo = styled.img<{ expanded: boolean }>`
     margin-top: ${({expanded}) => expanded ? '20px' : '5px'};
     margin-bottom: ${({expanded}) => expanded ? '10px' : '0'};
     transition: max-height 300ms, margin-bottom 300ms, margin-top 300ms;
+    
+    &:hover {
+        cursor: pointer;
+    }
 `
 
 const Links = styled.ul`
@@ -57,7 +61,7 @@ const Button = styled.button<{ variant: number, action?: boolean }>`
     ][variant]};
     margin-left: ${({action}) => action ? THEME.spacing.s3 : 0};
 
-    &:hover {
+    &:hover, &:focus {
         background-color: ${({action}) => action ? THEME.colors.primaryDark : THEME.colors.dark200};
         cursor: pointer;
     }
@@ -82,11 +86,19 @@ export const Header = () => {
         }
     }
 
+    const scrollToTop = () => {
+        window.scroll({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }
+
     const expanded = scroll < 300;
 
     return (
         <Container expanded={expanded}>
-            <Logo src={logo} alt={'Cartolidaires'} expanded={expanded}/>
+            <Logo src={logo} alt={'Cartolidaires'} expanded={expanded} onClick={scrollToTop} tabIndex={1}
+                  aria-label={'Cartolidaires, remonter en haut de page'}/>
             <Links role={'navigation'}>
                 <Link><Button variant={0} onClick={() => scrollTo(SECTIONS.map)}>La carte</Button></Link>
                 <Link><Button variant={1} onClick={() => scrollTo(SECTIONS.list)}>La liste</Button></Link>
