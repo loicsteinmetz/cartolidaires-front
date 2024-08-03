@@ -24,7 +24,7 @@ const Logo = styled.img<{ expanded: boolean }>`
     margin-top: ${({expanded}) => expanded ? '20px' : '5px'};
     margin-bottom: ${({expanded}) => expanded ? '10px' : '0'};
     transition: max-height 300ms, margin-bottom 300ms, margin-top 300ms;
-    
+
     &:hover {
         cursor: pointer;
     }
@@ -97,8 +97,12 @@ export const Header = () => {
 
     return (
         <Container expanded={expanded}>
-            <Logo src={logo} alt={'Cartolidaires'} expanded={expanded} onClick={scrollToTop} tabIndex={1}
-                  aria-label={'Cartolidaires, remonter en haut de page'}/>
+            <Logo src={logo} alt={'Cartolidaires'} expanded={expanded} onClick={scrollToTop} onKeyUp={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    scrollToTop();
+                }
+            }} tabIndex={0}
+                  aria-label={'Cartolidaires, remonter en haut de page'} role={'button'}/>
             <Links role={'navigation'}>
                 <Link><Button variant={0} onClick={() => scrollTo(SECTIONS.map)}>La carte</Button></Link>
                 <Link><Button variant={1} onClick={() => scrollTo(SECTIONS.list)}>La liste</Button></Link>
