@@ -17,6 +17,7 @@ export const THEME = {
     },
     fonts: {
         text: 'rockwell',
+        heading: 'solidaires',
     },
     fontSize: {
         s1: '12px',
@@ -33,6 +34,10 @@ export const THEME = {
         m: '1500px',
         s: '800px',
         xs: '600px',
+    },
+    zIndex: {
+        header: 1000,
+        modal: 2000,
     }
 } as const;
 

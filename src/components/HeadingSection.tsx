@@ -1,26 +1,88 @@
 import {SectionLayout} from "./SectionLayout.tsx";
-import {useEffect, useState} from "react";
-import {siApi} from "../api/siApi.ts";
+import styled from "styled-components";
+import {mediaQuery, THEME} from "../constants/theme.ts";
+
+const Container = styled.div`
+    border-top: 10px solid ${THEME.colors.dark100};
+    padding: ${THEME.spacing.s3} 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: ${THEME.spacing.s3};
+
+    @media ${mediaQuery(THEME.breakpoints.s)} {
+        margin-bottom: ${THEME.spacing.s2};
+    }
+`
+
+const Heading = styled.h1`
+    width: fit-content;
+    font-family: ${THEME.fonts.heading};
+    font-size: ${THEME.fontSize.s5};
+    color: ${THEME.colors.white};
+    text-align: center;
+    padding: ${THEME.spacing.s3} ${THEME.spacing.s4} calc(${THEME.spacing.s3} - 25px);
+    background-color: ${THEME.colors.dark300};
+    clip-path: polygon(2% 2%, 99.6% 0, 100% 100%, 0% 100%);
+    z-index: 2;
+    letter-spacing: 5px;
+    
+    @media ${mediaQuery(THEME.breakpoints.s)} {
+        font-size: ${THEME.fontSize.s4};
+        letter-spacing: 3px;
+        padding: ${THEME.spacing.s3} ${THEME.spacing.s4} calc(${THEME.spacing.s3} - 15px);
+    }
+    
+    @media ${mediaQuery(THEME.breakpoints.xs)} {
+        font-size: ${THEME.fontSize.s3};
+        letter-spacing: 2px;
+        font-weight: 400;
+        padding: ${THEME.spacing.s3} ${THEME.spacing.s3} calc(${THEME.spacing.s3} - 15px);
+    }
+`
+
+const RedBg = styled.div`
+    height: 100px;
+    margin-top: -60px;
+    width: 100%;
+    clip-path: polygon(0 0, 100% 10%, 100% 100%, 0% 100%);
+    background-color: ${THEME.colors.primary};
+
+    @media ${mediaQuery(THEME.breakpoints.s)} {
+        height: 50px;
+        margin-top: -25px;
+    }
+`
+
+const GreyBg = styled.div`
+    height: 100px;
+    margin-top: -120px;
+    width: 750px;
+    max-width: 100%;
+    clip-path: polygon(1% 2%, 99.6% 0, 100% 100%, 0% 100%);
+    background-color: ${THEME.colors.dark100};
+
+    @media ${mediaQuery(THEME.breakpoints.s)} {
+        height: 50px;
+        width: 460px;
+        margin-top: -62px;
+    }
+    
+    @media ${mediaQuery(THEME.breakpoints.xs)} {
+        width: 300px;
+    }
+`
 
 export const HeadingSection = () => {
-    const [test, setTest] = useState<number>();
-    const [testLoading, setTestLoading] = useState(true);
-    const [errorTest, setErrorTest] = useState<string>();
-    const [errorTestLoading, setErrorTestLoading] = useState(true);
-
-    useEffect(() => {
-        siApi.getTest(42).then((res) => {
-            if (res.success) setTest(res.data)
-        }).finally(() => setTestLoading(false));
-        siApi.getErrorTest(42).then((res) => {
-            if (!res.success) setErrorTest(res.errors.join(", "))
-        }).finally(() => setErrorTestLoading(false));
-    }, []);
-
     return (
         <SectionLayout>
-            <p>{testLoading ? "Loading..." : test}</p>
-            <p>{errorTestLoading ? "Loading..." : errorTest}</p>
+            <Container>
+                <Heading>
+                    FAIRE FRONT ! PARTOUT !
+                </Heading>
+                <RedBg/>
+                <GreyBg/>
+            </Container>
         </SectionLayout>
     )
 }

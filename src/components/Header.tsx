@@ -5,6 +5,7 @@ import {SECTIONS} from "../constants/sections.ts";
 import {useEffect, useState} from "react";
 
 const Container = styled.header<{ $expanded: boolean }>`
+    z-index: ${THEME.zIndex.header};
     background-color: ${THEME.colors.dark300};
     padding: ${THEME.spacing.s2} ${THEME.spacing.s5};
     display: flex;
@@ -83,7 +84,7 @@ const Button = styled.button<{ variant: number, $action?: boolean }>`
     ][variant]};
     margin-left: ${({$action}) => $action ? THEME.spacing.s3 : 0};
 
-    &:hover, &:focus {
+    &:hover, &:focus-visible {
         background-color: ${({$action}) => $action ? THEME.colors.primaryDark : THEME.colors.dark200};
         cursor: pointer;
     }
@@ -126,7 +127,7 @@ export const Header = () => {
         });
     }
 
-    const expanded = scroll < 300;
+    const expanded = scroll < 220;
 
     return (
         <Container $expanded={expanded}>

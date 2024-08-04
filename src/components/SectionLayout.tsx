@@ -6,7 +6,6 @@ export type SectionLayoutProps = {
 }
 
 const Container = styled.section`
-    height: 800px;
 `
 
 export const SectionLayout = ({id, children}: SectionLayoutProps) => {

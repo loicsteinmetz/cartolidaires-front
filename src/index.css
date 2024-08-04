@@ -11,3 +11,8 @@
     src: url('rockwell.ttf');
     src: url('rockwell-bold.ttf');
 }
+
+@font-face {
+    font-family: 'solidaires';
+    src: url('solidaires.otf');
+}
