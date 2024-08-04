@@ -28,5 +28,14 @@ export const THEME = {
     header: {
         height: 80,
         heightExpanded: 150,
+    },
+    breakpoints : {
+        m: '1500px',
+        s: '800px',
+        xs: '600px',
     }
 } as const;
+
+export const mediaQuery = (breakpoint: typeof THEME.breakpoints[keyof typeof THEME.breakpoints]) => {
+    return `(max-width: ${breakpoint})`
+}

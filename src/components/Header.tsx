@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import logo from '../assets/logo.png'
-import {THEME} from "../constants/theme.ts";
+import {mediaQuery, THEME} from "../constants/theme.ts";
 import {SECTIONS} from "../constants/sections.ts";
 import {useEffect, useState} from "react";
 
@@ -17,6 +17,18 @@ const Container = styled.header<{ $expanded: boolean }>`
     height: 100%;
     max-height: ${({$expanded}) => $expanded ? THEME.header.heightExpanded : THEME.header.height}px;
     transition: max-height 300ms;
+
+    @media ${mediaQuery(THEME.breakpoints.m)} {
+        padding: ${THEME.spacing.s2} ${THEME.spacing.s4};
+    }
+
+    @media ${mediaQuery(THEME.breakpoints.s)} {
+        max-height: ${THEME.header.height}px;
+    }
+
+    @media ${mediaQuery(THEME.breakpoints.xs)} {
+        padding: ${THEME.spacing.s2} 0 ${THEME.spacing.s2} ${THEME.spacing.s3};
+    }
 `
 
 const Logo = styled.img<{ $expanded: boolean }>`
@@ -27,6 +39,12 @@ const Logo = styled.img<{ $expanded: boolean }>`
 
     &:hover {
         cursor: pointer;
+    }
+
+    @media ${mediaQuery(THEME.breakpoints.s)} {
+        max-height: 80%;
+        margin-top: 5px;
+        margin-bottom: 0;
     }
 `
 
@@ -40,6 +58,10 @@ const Links = styled.ul`
 
     &:first-child(2) {
         clip-path: polygon(0 4%, 100% 0, 100% 98%, 0 100%);
+    }
+
+    @media ${mediaQuery(THEME.breakpoints.m)} {
+        gap: 0;
     }
 `
 
@@ -64,6 +86,16 @@ const Button = styled.button<{ variant: number, $action?: boolean }>`
     &:hover, &:focus {
         background-color: ${({$action}) => $action ? THEME.colors.primaryDark : THEME.colors.dark200};
         cursor: pointer;
+    }
+    
+    @media ${mediaQuery(THEME.breakpoints.m)} {
+        ${({$action}) => !$action && 'display: none;'}
+    }
+
+    @media ${mediaQuery(THEME.breakpoints.m)} {
+        height: calc(100% + ${THEME.spacing.s2});
+        margin-top: -${THEME.spacing.s1};
+        padding: ${THEME.spacing.s1} ${THEME.spacing.s2};
     }
 `
 
