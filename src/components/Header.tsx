@@ -18,6 +18,7 @@ const Container = styled.header<{ $expanded: boolean }>`
     height: 100%;
     max-height: ${({$expanded}) => $expanded ? THEME.header.heightExpanded : THEME.header.height}px;
     transition: max-height 300ms;
+    border-bottom: 5px solid ${THEME.colors.dark100};
 
     @media ${mediaQuery(THEME.breakpoints.m)} {
         padding: ${THEME.spacing.s2} ${THEME.spacing.s4};
@@ -127,7 +128,7 @@ export const Header = () => {
         });
     }
 
-    const expanded = scroll < 220;
+    const expanded = scroll < 200;
 
     return (
         <Container $expanded={expanded}>
