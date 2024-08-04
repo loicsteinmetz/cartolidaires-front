@@ -143,7 +143,7 @@ export const Header = () => {
 
     const closeModal = () => {
         openModalButtonRef.current?.focus();
-        setIsModalOpen(false)
+        setIsModalOpen(false);
     }
 
     const expanded = scroll < 200;

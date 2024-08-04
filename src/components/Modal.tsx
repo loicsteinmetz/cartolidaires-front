@@ -105,14 +105,20 @@ export const Modal = ({open, close, title, children}: ModalProps) => {
         const onLastFocus = () => {
             quitRef.current?.focus();
         }
+        const onFirstFocus = () => {
+            (getLastFocusableElement() as HTMLButtonElement)?.focus();
+        }
         if (open) {
             document.body.style.overflow = 'hidden';
             document.addEventListener('keydown', onEscape);
             getLastFocusableElement()?.addEventListener('focusout', onLastFocus);
+            quitRef.current?.addEventListener('focusout', onFirstFocus);
+
         } else {
             document.body.style.overflow = 'auto';
             document.removeEventListener('keydown', onEscape);
             getLastFocusableElement()?.removeEventListener('focusout', onLastFocus);
+            quitRef.current?.removeEventListener('focusout', onFirstFocus);
         }
     }, [close, open])
 
