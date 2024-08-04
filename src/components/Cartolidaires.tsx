@@ -10,6 +10,11 @@ import {mediaQuery, THEME} from "../constants/theme.ts";
 
 const Main = styled.main`
     margin-top: ${THEME.header.heightExpanded}px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
     
     &:before {
         content: "";
@@ -17,6 +22,7 @@ const Main = styled.main`
         height: ${THEME.header.heightExpanded}px;
         margin-top: -${THEME.header.heightExpanded}px;
         background-color: ${THEME.colors.dark200};
+        width: 100%;
     }
 
     @media ${mediaQuery(THEME.breakpoints.s)} {

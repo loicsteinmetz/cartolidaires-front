@@ -6,6 +6,10 @@ export type SectionLayoutProps = {
 }
 
 const Container = styled.section`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 `
 
 export const SectionLayout = ({id, children}: SectionLayoutProps) => {

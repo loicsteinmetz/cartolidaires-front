@@ -36,8 +36,11 @@ export const THEME = {
         xs: '600px',
     },
     zIndex: {
-        header: 1000,
-        modal: 2000,
+        header: 10000,
+        modal: 20000,
+    },
+    sizes: {
+        sectionMaxWidth: '1200px',
     }
 } as const;
 

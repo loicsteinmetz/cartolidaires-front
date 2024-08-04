@@ -3,15 +3,20 @@ import styled from "styled-components";
 import {mediaQuery, THEME} from "../constants/theme.ts";
 
 const Container = styled.div`
-    border-top: 10px solid ${THEME.colors.dark100};
-    padding: ${THEME.spacing.s3} 0;
+    padding: ${THEME.spacing.s4} 0;
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%;
     margin-bottom: ${THEME.spacing.s3};
 
-    @media ${mediaQuery(THEME.breakpoints.s)} {
+    @media ${mediaQuery(THEME.breakpoints.m)} {
         margin-bottom: ${THEME.spacing.s2};
+        padding: ${THEME.spacing.s3} 0;
+    }
+
+    @media ${mediaQuery(THEME.breakpoints.m)} {
+        margin-bottom: ${THEME.spacing.s1};
     }
 `
 
@@ -36,7 +41,6 @@ const Heading = styled.h1`
     @media ${mediaQuery(THEME.breakpoints.xs)} {
         font-size: ${THEME.fontSize.s3};
         letter-spacing: 2px;
-        font-weight: 400;
         padding: ${THEME.spacing.s3} ${THEME.spacing.s3} calc(${THEME.spacing.s3} - 15px);
     }
 `
