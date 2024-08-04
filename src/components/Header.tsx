@@ -84,6 +84,7 @@ const Button = styled.button<{ variant: number, $action?: boolean }>`
         'polygon(2% 0, 100% 2%, 100% 100%, 0 100%);',
     ][variant]};
     margin-left: ${({$action}) => $action ? THEME.spacing.s3 : 0};
+    outline: none;
 
     &:hover, &:focus-visible {
         background-color: ${({$action}) => $action ? THEME.colors.primaryDark : THEME.colors.dark200};

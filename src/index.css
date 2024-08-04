@@ -7,6 +7,11 @@
     font-weight: 400;
 }
 
+*:focus-visible {
+    outline: 1px solid white;
+    outline-offset: 5px;
+}
+
 @font-face {
     font-family: 'rockwell';
     src: url('rockwell.ttf');
