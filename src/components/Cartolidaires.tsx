@@ -6,10 +6,10 @@ import {ListSection} from "./ListSection.tsx";
 import {AboutSection} from "./AboutSection.tsx";
 import {Footer} from "./Footer.tsx";
 import styled from "styled-components";
-import {THEME} from "../constants/theme.ts";
+import {mediaQuery, THEME} from "../constants/theme.ts";
 
 const Main = styled.main`
-    margin-top: 150px;
+    margin-top: ${THEME.header.heightExpanded}px;
     
     &:before {
         content: "";
@@ -17,6 +17,10 @@ const Main = styled.main`
         height: ${THEME.header.heightExpanded}px;
         margin-top: -${THEME.header.heightExpanded}px;
         background-color: ${THEME.colors.dark200};
+    }
+
+    @media ${mediaQuery(THEME.breakpoints.s)} {
+        margin-top: ${THEME.header.height}px;
     }
 `
 export const Cartolidaires = () => {

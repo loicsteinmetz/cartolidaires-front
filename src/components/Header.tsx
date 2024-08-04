@@ -87,7 +87,7 @@ const Button = styled.button<{ variant: number, $action?: boolean }>`
         background-color: ${({$action}) => $action ? THEME.colors.primaryDark : THEME.colors.dark200};
         cursor: pointer;
     }
-    
+
     @media ${mediaQuery(THEME.breakpoints.m)} {
         ${({$action}) => !$action && 'display: none;'}
     }
