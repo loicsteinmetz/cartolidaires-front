@@ -41,6 +41,7 @@ export const THEME = {
     },
     sizes: {
         sectionMaxWidth: '1200px',
+        modalMaxWidth: '800px',
     }
 } as const;
 

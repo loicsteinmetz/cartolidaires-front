@@ -2,7 +2,9 @@ import styled from "styled-components";
 import logo from '../assets/logo.png'
 import {mediaQuery, THEME} from "../constants/theme.ts";
 import {SECTIONS} from "../constants/sections.ts";
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
+import {Modal} from "./Modal.tsx";
+import {AddItemForm} from "./AddItemForm.tsx";
 
 const Container = styled.header<{ $expanded: boolean }>`
     z-index: ${THEME.zIndex.header};
@@ -103,7 +105,9 @@ const Button = styled.button<{ variant: number, $action?: boolean }>`
 `
 
 export const Header = () => {
+    const openModalButtonRef = useRef<HTMLButtonElement>(null);
     const [scroll, setScroll] = useState(window.scrollY);
+    const [isModalOpen, setIsModalOpen] = useState(true);
 
     useEffect(() => {
         setScroll(window.scrollY);
@@ -119,6 +123,14 @@ export const Header = () => {
                 top: elt.getBoundingClientRect().top + window.scrollY - THEME.header.height,
                 behavior: 'smooth'
             });
+            setTimeout(() => {
+                const focusableElements = elt.querySelectorAll(
+                    'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+                );
+                if (focusableElements.length > 0) {
+                    (focusableElements?.[0] as HTMLButtonElement).focus();
+                }
+            }, 300)
         }
     }
 
@@ -127,6 +139,11 @@ export const Header = () => {
             top: 0,
             behavior: 'smooth'
         });
+    }
+
+    const closeModal = () => {
+        openModalButtonRef.current?.focus();
+        setIsModalOpen(false)
     }
 
     const expanded = scroll < 200;
@@ -143,7 +160,11 @@ export const Header = () => {
                 <Link><Button variant={0} onClick={() => scrollTo(SECTIONS.map)}>La carte</Button></Link>
                 <Link><Button variant={1} onClick={() => scrollTo(SECTIONS.list)}>La liste</Button></Link>
                 <Link><Button variant={2} onClick={() => scrollTo(SECTIONS.about)}>En savoir plus</Button></Link>
-                <Link><Button variant={3} $action>Ajouter une initiative</Button></Link>
+                <Link><Button ref={openModalButtonRef} variant={3} $action onClick={() => setIsModalOpen(true)}>Ajouter
+                    une initiative</Button></Link>
+                <Modal open={isModalOpen} close={closeModal} title={'Ajouter une initiative'}>
+                    <AddItemForm/>
+                </Modal>
             </Links>
         </Container>
     )
