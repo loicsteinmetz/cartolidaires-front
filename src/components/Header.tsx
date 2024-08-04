@@ -107,7 +107,7 @@ const Button = styled.button<{ variant: number, $action?: boolean }>`
 export const Header = () => {
     const openModalButtonRef = useRef<HTMLButtonElement>(null);
     const [scroll, setScroll] = useState(window.scrollY);
-    const [isModalOpen, setIsModalOpen] = useState(true);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     useEffect(() => {
         setScroll(window.scrollY);
