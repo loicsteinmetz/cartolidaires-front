@@ -102,6 +102,11 @@ const Button = styled.button<{ variant: number, $action?: boolean }>`
         margin-top: -${THEME.spacing.s1};
         padding: ${THEME.spacing.s1} ${THEME.spacing.s2};
     }
+    
+    @media ${mediaQuery(THEME.breakpoints.xs)} {
+        height: calc(100%);
+        margin-top: 0;
+    }
 `
 
 export const Header = () => {

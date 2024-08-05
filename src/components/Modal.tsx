@@ -55,12 +55,12 @@ const Title = styled.h1`
 `
 
 const Quit = styled.button`
-    color: ${THEME.colors.dark100};
+    color: ${THEME.colors.white};
     font-size: ${THEME.fontSize.s3};
     font-family: ${THEME.fonts.text};
     background-color: transparent;
     padding: 5px 10px;
-    border: 1px solid ${THEME.colors.dark100};
+    border: 1px solid ${THEME.colors.white};
     outline: none;
 
     &:hover, &:focus-within {
