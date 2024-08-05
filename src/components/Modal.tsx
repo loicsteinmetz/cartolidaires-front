@@ -31,7 +31,10 @@ const Container = styled.div`
 
     @media ${mediaQuery(THEME.breakpoints.xs)} {
         margin: 0 ${THEME.spacing.s2};
-        padding: ${THEME.spacing.s2};
+    }
+
+    @media (max-height: 600px) {
+        padding: ${THEME.spacing.s2} ${THEME.spacing.s3};
     }
 `
 
