@@ -35,6 +35,7 @@ const Line = styled.div`
     margin: ${THEME.spacing.s4} 0;
     display: flex;
     justify-content: center;
+    padding: 0 ${THEME.spacing.s2};
     
     &:after {
         content: '';
@@ -42,6 +43,11 @@ const Line = styled.div`
         width: calc(${THEME.sizes.sectionMaxWidth} - ${THEME.spacing.s3});
         height: 4px;
         background-color: ${THEME.colors.dark300};
+    }
+
+    @media ${mediaQuery(THEME.breakpoints.s)} {
+        margin: ${THEME.spacing.s3} 0;
+        padding: 0 ${THEME.spacing.s1};
     }
 `
 
