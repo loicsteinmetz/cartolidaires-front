@@ -20,7 +20,7 @@ const About = styled.div`
     background-color: ${THEME.colors.dark300};
     width: calc(100% - ${THEME.spacing.s3});
     padding: ${THEME.spacing.s4} ${THEME.spacing.s5};
-    margin-top: ${THEME.spacing.s3};
+    margin-top: ${THEME.spacing.s4};
     clip-path: polygon(0% 1%, 99.6% 0, 100% 99%, 0% 100%);
 
     @media ${mediaQuery(THEME.breakpoints.s)} {
