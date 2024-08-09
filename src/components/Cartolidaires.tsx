@@ -29,6 +29,23 @@ const Main = styled.main`
         margin-top: ${THEME.header.height}px;
     }
 `
+
+const Line = styled.div`
+    width: 100%;
+    margin: ${THEME.spacing.s4} 0;
+    display: flex;
+    justify-content: center;
+    
+    &:after {
+        content: '';
+        display: block;
+        width: calc(${THEME.sizes.sectionMaxWidth} - ${THEME.spacing.s3});
+        height: 4px;
+        background-color: ${THEME.colors.dark300};
+    }
+`
+
+
 export const Cartolidaires = () => {
     return (
         <Layout>
@@ -38,6 +55,7 @@ export const Cartolidaires = () => {
                 <MapSection/>
                 <ListSection/>
                 <AboutSection/>
+                <Line />
             </Main>
             <Footer/>
         </Layout>

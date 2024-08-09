@@ -70,7 +70,6 @@ const RedBg = styled.div`
     background-color: ${THEME.colors.primary};
     margin-top: -200px;
     clip-path: polygon(0 0, 100% 10%, 100% 100%, 0% 100%);
-    margin-bottom: ${THEME.spacing.s3};
 
     @media ${mediaQuery(THEME.breakpoints.m)} {
         margin-top: -225px;
