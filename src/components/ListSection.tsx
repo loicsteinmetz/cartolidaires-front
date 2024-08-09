@@ -53,6 +53,11 @@ const ListBg = styled.div`
         padding: ${THEME.spacing.s3} ${THEME.spacing.s2};
         width: calc(100% - ${THEME.spacing.s2});
     }
+
+    @media ${mediaQuery(THEME.breakpoints.xs)} {
+        padding: ${THEME.spacing.s3} ${THEME.spacing.s1};
+        width: calc(100% - ${THEME.spacing.s2});
+    }
 `
 
 const ListContainer = styled.div`
@@ -60,7 +65,11 @@ const ListContainer = styled.div`
     padding: ${THEME.spacing.s3} ${THEME.spacing.s4};
 
     @media ${mediaQuery(THEME.breakpoints.m)} {
-        padding: ${THEME.spacing.s3} ${THEME.spacing.s3};
+        padding: ${THEME.spacing.s3};
+    }
+
+    @media ${mediaQuery(THEME.breakpoints.xs)} {
+        padding: ${THEME.spacing.s2};
     }
 `
 
