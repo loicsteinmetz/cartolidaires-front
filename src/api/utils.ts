@@ -9,7 +9,7 @@ export type ApiResponse<T> = {
 };
 
 export type ApiListResponse<T> = {
-    data: T;
+    data: T[];
     status: number;
     success: true;
     page: number;
@@ -23,15 +23,11 @@ export type ApiListResponse<T> = {
 
 export type ApiRequest<Params, Response extends ApiResponse<unknown>> = (params: Params) => Promise<Response>;
 
-export const mockApi = <P, R>(data: R, status?: number): (params: P) => Promise<ApiResponse<R>> => {
+export const mockApi = <P, R>(res: R): (params: P) => Promise<R> => {
     return (params: P) => new Promise((resolve) => {
         console.debug('API call', params);
         setTimeout(() => {
-            resolve({
-                data,
-                status: status ?? 200,
-                success: true,
-            });
+            resolve(res);
         }, 1000);
     });
 }

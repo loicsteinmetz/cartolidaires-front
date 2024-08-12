@@ -1,6 +1,9 @@
 import styled, {keyframes} from "styled-components";
 import {mediaQuery, THEME} from "../constants/theme.ts";
-import {useState} from "react";
+import {useCallback, useEffect, useState} from "react";
+import {siApi} from "../api/siApi.ts";
+import {ListItem} from "../types/types.ts";
+import {v4 as uuid} from 'uuid';
 
 const Container = styled.div`
     display: flex;
@@ -52,13 +55,11 @@ const SearchInput = styled.input`
 const TRow = styled.tr`
 `
 
-const Td = styled.td`
+const Td = styled.td<{ center?: boolean, empty?: boolean }>`
     padding: ${THEME.spacing.s3} ${THEME.spacing.s2} ${THEME.spacing.s2} ${THEME.spacing.s2};
-    border-bottom: 2px solid ${THEME.colors.dark100};
-
-    @media ${mediaQuery(THEME.breakpoints.s)} {
-        padding: ${THEME.spacing.s3} ${THEME.spacing.s1} ${THEME.spacing.s2} ${THEME.spacing.s1};
-    }
+    border-bottom: 2px solid ${({empty}) => empty ? 'transparent' : THEME.colors.dark100};
+    ${({center}) => center ? 'text-align: center;' : ''} @media ${mediaQuery(THEME.breakpoints.s)}
+    padding: ${THEME.spacing.s3} ${THEME.spacing.s1} ${THEME.spacing.s2} ${THEME.spacing.s1};
 `
 
 const SkeletonAnimation = keyframes`
@@ -92,6 +93,24 @@ const PaginationSkeleton = styled.div`
     height: calc(${THEME.fontSize.s2} + ${THEME.spacing.s3});
     width: 200px;
     animation: ${SkeletonAnimation} 2s infinite;
+`
+
+const PaginationWrapper = styled.div`
+    padding: ${THEME.spacing.s2} ${THEME.spacing.s3};
+    display: flex;
+    gap: ${THEME.spacing.s1};
+`
+
+const Page = styled.button<{active: boolean}>`
+    background: none;
+    font-family: ${THEME.fonts.text};
+    color: ${({active}) => active ? THEME.colors.primary : THEME.colors.white};
+    font-size: ${THEME.fontSize.s2};
+    
+    &:hover {
+        color: ${THEME.colors.primary};
+        cursor: pointer;
+    }
 `
 
 const ContainerMobile = styled.div`
@@ -129,8 +148,28 @@ const SkeletonMobile = styled.div`
 
 export const List = () => {
     const NUMBER_ITEMS = 10
+    const [items, setItems] = useState<ListItem[]>([]);
+    const [page, setPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
     const [isFirstLoading, setIsFirstLoading] = useState(true);
     const [isLoading, setIsLoading] = useState(true);
+    
+    const fetchItems = useCallback(() => {
+        setIsLoading(true);
+        siApi.getList({page}).then((res) => {
+            if (res.success) {
+                setItems(res.data);
+                setPage(res.page);
+                setTotalPages(res.nbPages);
+                setIsFirstLoading(false);
+                setIsLoading(false);
+            }
+        })
+    }, [page])
+
+    useEffect(() => {
+        fetchItems();
+    }, [fetchItems]);
 
     return (
         <>
@@ -151,13 +190,27 @@ export const List = () => {
                                 <Td><Skeleton/></Td>
                                 <Td><Skeleton/></Td>
                             </TRow>
-                        ))) : <></>}
+                        ))) : items.map((item) => (
+                            <TRow key={`items-${uuid()}`}>
+                                <Td>{item.name}</Td>
+                                <Td center>{item.department}</Td>
+                                <Td center>{item.city}</Td>
+                                <Td center></Td>
+                            </TRow>
+                        ))}
+                        {!isLoading && items.length < NUMBER_ITEMS && ([...Array(NUMBER_ITEMS - items.length).keys()].map(() => (
+                            <TRow key={`items-${uuid()}`} aria-hidden="true">
+                                <Td empty></Td>
+                            </TRow>
+                        )))}
                     </THead>
                 </Table>
                 <PaginationContainer>
-                    {isFirstLoading && (
+                    {isFirstLoading ? (
                         <PaginationSkeleton/>
-                    )}
+                    ) : <PaginationWrapper>{[...Array(totalPages).keys()].map((_, i) => (
+                        <Page active={i + 1 === page} onClick={() => setPage(i + 1)}>{i + 1}</Page>
+                    ))}</PaginationWrapper>}
                 </PaginationContainer>
             </Container>
 
@@ -166,7 +219,7 @@ export const List = () => {
             <ContainerMobile>
                 <SearchInputMobile type={'text'} placeholder={'Rechercher...'}/>
                 {isLoading ? ([...Array(NUMBER_ITEMS).keys()].map((i) => (
-                    <SkeletonMobile/>
+                    <SkeletonMobile key={i}/>
                 ))) : <></>}
                 <PaginationContainer>
                     {isFirstLoading && (
