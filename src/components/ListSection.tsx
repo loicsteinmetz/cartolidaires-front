@@ -55,7 +55,7 @@ const ListBg = styled.div`
     }
 
     @media ${mediaQuery(THEME.breakpoints.xs)} {
-        padding: ${THEME.spacing.s3} ${THEME.spacing.s1};
+        padding: ${THEME.spacing.s2} ${THEME.spacing.s1};
         width: calc(100% - ${THEME.spacing.s2});
     }
 `

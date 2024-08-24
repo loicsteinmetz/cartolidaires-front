@@ -73,7 +73,7 @@ const SkeletonAnimation = keyframes`
 
 const Skeleton = styled.div`
     width: 100%;
-    height: ${THEME.fontSize.s2};
+    height: 19px;
     background-color: ${THEME.colors.dark100};
     animation: ${SkeletonAnimation} 2s infinite;
 `
@@ -144,6 +144,26 @@ const SkeletonMobile = styled.div`
     animation: infinite ${SkeletonAnimation} 2s;
     width: 100%;
     margin-top: ${THEME.spacing.s2};
+`
+
+const ItemMobileCard = styled.div`
+    width: 100%;
+    background-color: ${THEME.colors.dark200};
+    padding: ${THEME.spacing.s2};
+    margin-top: ${THEME.spacing.s2};
+`
+
+const ItemTitleMobile = styled.p`
+    font-family: ${THEME.fonts.text};
+    color: ${THEME.colors.white};
+    font-size: ${THEME.fontSize.s2};
+`
+
+const ItemLocationMobile = styled.p`
+    font-family: ${THEME.fonts.text};
+    color: ${THEME.colors.white};
+    font-size: ${THEME.fontSize.s1};
+    margin-top: ${THEME.spacing.s1};
 `
 
 export const List = () => {
@@ -220,11 +240,18 @@ export const List = () => {
                 <SearchInputMobile type={'text'} placeholder={'Rechercher...'}/>
                 {isLoading ? ([...Array(NUMBER_ITEMS).keys()].map((i) => (
                     <SkeletonMobile key={i}/>
-                ))) : <></>}
+                ))) : items.map((item) => (
+                    <ItemMobileCard key={`items-${uuid()}`}>
+                        <ItemTitleMobile>{item.name}</ItemTitleMobile>
+                        <ItemLocationMobile>{item.city} ({item.department})</ItemLocationMobile>
+                    </ItemMobileCard>
+                ))}
                 <PaginationContainer>
-                    {isFirstLoading && (
+                    {isFirstLoading ? (
                         <PaginationSkeleton/>
-                    )}
+                    ) : <PaginationWrapper>{[...Array(totalPages).keys()].map((_, i) => (
+                        <Page active={i + 1 === page} onClick={() => setPage(i + 1)}>{i + 1}</Page>
+                    ))}</PaginationWrapper>}
                 </PaginationContainer>
             </ContainerMobile>
         </>
