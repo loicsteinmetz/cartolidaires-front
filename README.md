@@ -1,5 +1,16 @@
 # Cartolidaires
 
+## Démarrage local
+
+> Nécessite l'installation de node et npm.
+
+ˋˋˋ
+$ npm install
+$ npm run dev
+ˋˋˋ
+
+---
+
 > React / Typescript / Vite 👇
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
