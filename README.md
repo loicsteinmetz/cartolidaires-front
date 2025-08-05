@@ -4,10 +4,10 @@
 
 > Nécessite l'installation de node et npm.
 
-ˋˋˋ
+```
 $ npm install
 $ npm run dev
-ˋˋˋ
+```
 
 ---
 
